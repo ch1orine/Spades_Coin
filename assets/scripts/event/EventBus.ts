@@ -33,6 +33,8 @@ export class EventBus extends EventTarget {
 
   public static AddScore = "addScore"; //增加分数事件
 
+  public static Combine = "combine"; //组合方块事件
+
   
   private static _instance: EventBus;
   public static get instance(): EventBus {

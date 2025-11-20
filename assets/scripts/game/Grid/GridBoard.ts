@@ -1,4 +1,5 @@
 import { _decorator, Component, Graphics, UITransform, Color } from "cc";
+import { EventBus } from "../../event/EventBus";
 const { ccclass, property } = _decorator;
 
 /**
@@ -49,7 +50,9 @@ export class GridBoard extends Component {
 
     this.drawGrid();
 
-    this.removeLines3x3(3,3);
+    EventBus.instance.on("combine", this.removeLines3x3, this);
+
+    // this.removeLines3x3(3,3);
     this.removeLines3x3(2,2);
   }
 

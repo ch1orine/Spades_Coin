@@ -12,9 +12,5 @@ export class test extends Component {
         // const block = node.addComponent(Block);
         // block.load(node);        
     }
-
-    update(deltaTime: number) {
-        
-    }
 }
 

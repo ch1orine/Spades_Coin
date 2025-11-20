@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, EventTouch, Vec3 } from "cc";
+import { EventBus } from "../../../event/EventBus";
 const { ccclass, property } = _decorator;
 
 @ccclass("BlockBll")
@@ -13,11 +14,12 @@ export class BlockBll extends Component {
     this.node.on(Node.EventType.TOUCH_START, this.OnTouchStart, this);
     this.node.on(Node.EventType.TOUCH_MOVE, this.OnTouchMove, this);
     this.node.on(Node.EventType.TOUCH_END, this.OnTouchEnd, this);
-    this.node.on(Node.EventType.TOUCH_CANCEL, this.OnTouchEnd, this);
+    this.node.on(Node.EventType.TOUCH_CANCEL, this.OnTouchEnd, this);    
   }
 
   private OnTouchStart(event: EventTouch) {
     console.log("Touch Start");
+    EventBus.instance.emit(EventBus.Combine, 3, 3);
   }
 
   private OnTouchMove(event: EventTouch) {

@@ -28,6 +28,8 @@ export class Block extends Component {
   protected onLoad(): void {    
     this.model = this.addComponent(BlockModel);
     this.bll = this.addComponent(BlockBll);
+
+    
   }
 
   load(parent: Node, pos: Vec3 = Vec3.ZERO) {
