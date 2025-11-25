@@ -43,14 +43,12 @@ export class BlockManagerView {
     // Color.fromHEX(this._color, "#FFFFFF");
   }
 
-  public showWipeEffect(pos: { x: number; y: number }) {
+  public showWipeEffect(pos: { row: number; col: number }) {
     if (!this._wipe) return;
-    const row = Math.round(6 - pos.y / 85);
-    const col = Math.round(pos.x / 85 + 3.5);
-    this._wipe.setPosition(pos.x - 50, pos.y, 0);//todo xoffset yoffset
+    this._wipe.setPosition(pos.col * 85-3.5 * 85 + 10, (6- pos.row) * 85, 0);
     const wipe = this._wipe.getComponent(Wipe); 
     setTimeout(() => {    
-        wipe.playWipeEffect(row, col);
+        wipe.playWipeEffect(pos.row, pos.col);
     }, 200);      //明天添加字体放大效果
   }
 

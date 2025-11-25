@@ -56,7 +56,7 @@ export class BlockManagerBll {
     //首先为通路，然后同行或同列，最后值相等或加和为10
     if (pass === 1 && (row === selfRow || col === selfCol) && this.checkPassable(e, row, col, selfRow, selfCol) && (val == originVal || val + originVal === 10) ) {
       EventBus.instance.emit(JumpEvent.onJump);
-      EventBus.instance.emit(BlockManagerEvent.onWipe, pos);
+      EventBus.instance.emit(BlockManagerEvent.onWipe, {row,col});
       e.BlockManagerModel.updateMapValue(selfRow, selfCol);
       e.BlockManagerModel.updateMapValue(row, col);
       e.BlockManagerModel.getBlock(selfRow, selfCol).node.active = false;
