@@ -3,16 +3,13 @@ import {
   Component,
   Node,
   Vec3,
-  Prefab,
-  instantiate,
   resources,
-  v3,
   SpriteFrame,
 } from "cc";
 import { BlockModel } from "./model/BlockModel";
 import { BlockView } from "./view/BlockView";
 import { BlockBll } from "./bll/BlockBll";
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass("Block")
 export class Block extends Component {

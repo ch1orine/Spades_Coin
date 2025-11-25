@@ -3,8 +3,8 @@ import { Block } from "../../block/Block";
 import { BlockManager } from "../BlockManager";
 import { EventBus } from "../../../event/EventBus";
 import { BlockEvent } from "../../block/BlockEvent";
-import { BlockManagerModel } from "../model/BlockManagerModel";
 import { JumpEvent } from "../../jump/JumpEvent";
+import { BlockManagerEvent } from "../BlockManagerEvent";
 
 export class BlockManagerBll {
   /** 创建砖块对象 */
@@ -55,12 +55,13 @@ export class BlockManagerBll {
 
     //首先为通路，然后同行或同列，最后值相等或加和为10
     if (pass === 1 && (row === selfRow || col === selfCol) && this.checkPassable(e, row, col, selfRow, selfCol) && (val == originVal || val + originVal === 10) ) {
+      EventBus.instance.emit(JumpEvent.onJump);
+      EventBus.instance.emit(BlockManagerEvent.onWipe,pos);
       e.BlockManagerModel.updateMapValue(selfRow, selfCol);
       e.BlockManagerModel.updateMapValue(row, col);
       e.BlockManagerModel.getBlock(selfRow, selfCol).node.active = false;
       e.BlockManagerModel.getBlock(row, col).node.active = false;
-      e.onWipeHandler(col, row);
-      EventBus.instance.emit(JumpEvent.onJump);
+      // e.onWipeHandler(col, row);
     }
     else {
       EventBus.instance.emit(BlockEvent.InvalidDrag);

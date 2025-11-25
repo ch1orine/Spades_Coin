@@ -4,7 +4,7 @@ import { gameConfig } from "./common/GameConfig";
 import { Sound } from "./sound/Sound";
 import super_html_playable from "./common/super_html_playable";
 import { EventBus } from "./event/EventBus";
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass("Main")
 export class Main extends Component {

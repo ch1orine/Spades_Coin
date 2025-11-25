@@ -5,10 +5,11 @@ import {
 import { Block } from "../block/Block";
 import { BlockManagerModel } from "./model/BlockManagerModel";
 import { BlockManagerBll } from "./bll/BlockManagerBll";
-import { BlockManagerView } from "./view/BlockManagerView";
+import { BlockManagerView } from "./view/BlockManagerView"
 import { BlockEvent } from "../block/BlockEvent";
 import { EventBus } from "../../event/EventBus";
 import { GridEvent } from "../grid/GridEvent";
+import { BlockManagerEvent } from "./BlockManagerEvent";
 
 export class BlockManager {
   //数据层
@@ -33,6 +34,7 @@ export class BlockManager {
 
   private addEvents(){
     EventBus.instance.on(BlockEvent.CheckPosValid, this.checkPositionValid, this);
+    EventBus.instance.on(BlockManagerEvent.onWipeComplete, this.onWipeCompleteHandler, this);
   }
 
   private checkPositionValid(pos: Vec3, originPos:Vec3) {      
@@ -54,7 +56,7 @@ export class BlockManager {
   }
  
 
-  public onWipeHandler(col: number, row: number) {        
+  public onWipeCompleteHandler(col: number, row: number) {        
     EventBus.instance.emit(GridEvent.WipeGrid, row, col);
     const minCol = Math.max(0, col - 1);
     const maxCol = Math.min(7, col + 1);

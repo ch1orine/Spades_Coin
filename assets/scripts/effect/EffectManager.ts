@@ -13,7 +13,7 @@ import {
 } from "cc";
 import { Sound } from "../sound/Sound";
 import { EventBus } from "../event/EventBus";
-const { ccclass, property } = _decorator;
+const { ccclass } = _decorator;
 
 @ccclass("EffectManager")
 export class EffectManager {

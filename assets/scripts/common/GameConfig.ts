@@ -55,6 +55,13 @@ export default class GameConfig {
             : '';
     }
 
+
+    public getColor(): string {
+        return this.configData && typeof this.configData.color === 'string'
+            ? this.configData.color
+            : '#FFFFFF';
+    }
+
     /** 
      * 获取浏览器语言
      * @returns 浏览器语言代码，如 'zh-CN', 'en-US' 等
