@@ -18,12 +18,16 @@ export class Main extends Component {
 
   private _begin:boolean = false;
 
+  private readonly URL_APPSTORE= "https://apps.apple.com/us/app/number-match-fun-puzzle-game/id6473832648";
+  private readonly URL_GOOGLE_PLAY= "https://play.google.com/store/apps/details?id=daily.number.match.free.puzzle"
+
   onLoad() {
-    //加载游戏数据
-    gameConfig.loadConfig().then(() => {
-      this.adaptPlayable();
+    //配置playable数据
+    this.adaptPlayable();
+    //配置游戏数据
+    gameConfig.loadConfig().then(() => {      
       this.init();
-      i18n.init(gameConfig.getSimplifiedLanguage()); // 设置为配置语言
+      i18n.init(gameConfig.getSimplifiedLanguage()); // 设置为配置语言      
     });
 
     EventBus.instance.on(EventBus.UpdateTimer, this.checkTimer, this);
@@ -31,13 +35,9 @@ export class Main extends Component {
   }
 
   adaptPlayable() {
-    //适配playable广告
-    super_html_playable.set_google_play_url(
-      gameConfig.getConfigValue<string>("URL_GOOGLE_PLAY") || ""
-    );
-    super_html_playable.set_app_store_url(
-      gameConfig.getConfigValue<string>("URL_APPSTORE") || ""
-    );
+    super_html_playable.set_app_store_url(this.URL_APPSTORE);
+    super_html_playable.set_google_play_url(this.URL_GOOGLE_PLAY);
+    //适配playable广告    
     // （ 解决ironsource移动广告平台声音问题，Only : ironsource ） 游戏开始时，获取声音状态以决定是否将音量设置为0。
     if (super_html_playable.is_audio()) Sound.ins.volume = 1;
     else Sound.ins.volume = 0;

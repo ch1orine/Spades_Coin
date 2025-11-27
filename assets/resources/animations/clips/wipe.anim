@@ -11,7 +11,7 @@
     "speed": 1,
     "wrapMode": 1,
     "enableTrsBlending": false,
-    "_duration": 0.6666666666666666,
+    "_duration": 0.5166666666666667,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -27,12 +27,12 @@
     "_exoticAnimation": null,
     "_events": [
       {
-        "frame": 0.3,
+        "frame": 0.13333333333333333,
         "func": "",
         "params": []
       },
       {
-        "frame": 0.3,
+        "frame": 0.13333333333333333,
         "func": "onDrawGrid",
         "params": []
       }
@@ -78,22 +78,22 @@
   {
     "__type__": "cc.ObjectCurve",
     "_times": [
+      0,
       0.016666666666666666,
       0.06666666666666667,
       0.1,
-      0.15,
-      0.18333333333333332,
-      0.23333333333333334,
+      0.11666666666666667,
+      0.16666666666666666,
+      0.2,
+      0.21666666666666667,
       0.26666666666666666,
+      0.3,
       0.31666666666666665,
-      0.35,
+      0.36666666666666664,
       0.4,
-      0.43333333333333335,
-      0.48333333333333334,
-      0.5166666666666667,
-      0.5666666666666667,
-      0.6,
-      0.65
+      0.4166666666666667,
+      0.45,
+      0.5
     ],
     "_values": [
       {
@@ -366,14 +366,14 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1.2000000476837158,
+        "value": 1.600000023841858,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
         "leftTangentWeight": 1,
         "easingMethod": 0,
         "__editorExtras__": {
-          "tangentMode": 0
+          "broken": null
         }
       }
     ],
@@ -396,14 +396,14 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 0,
         "tangentWeightMode": 0,
-        "value": 1.2000000476837158,
+        "value": 1.600000023841858,
         "rightTangent": 0,
         "rightTangentWeight": 1,
         "leftTangent": 0,
         "leftTangentWeight": 1,
         "easingMethod": 0,
         "__editorExtras__": {
-          "tangentMode": 0
+          "broken": null
         }
       }
     ],
@@ -433,7 +433,7 @@
         "leftTangentWeight": 1,
         "easingMethod": 0,
         "__editorExtras__": {
-          "tangentMode": 0
+          "broken": null
         }
       }
     ],

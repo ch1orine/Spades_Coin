@@ -2,7 +2,5 @@
   "threeStepS": true,
   "stepsToJump": 5,
   "testStr": "测试字符串",
-  "color":"#4F3B93",
-  "URL_APPSTORE": "https://apps.apple.com/us/app/number-match-fun-puzzle-game/id6473832648",
-  "URL_GOOGLE_PLAY": "https://play.google.com/store/apps/details?id=daily.number.match.free.puzzle"
+  "color":"#4F3B93"
 }

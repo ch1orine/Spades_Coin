@@ -54,6 +54,7 @@ export class BlockView extends Component {
       return;
     }
     EventBus.instance.emit(BlockEvent.CheckPosValid, this.node.position, this._originalPosition);
+    EventBus.instance.emit(GuideEvent.StopShowGuide);
     const touchPos = event.getUILocation();
     this.node.setWorldPosition(touchPos.x, touchPos.y, 0);
   }

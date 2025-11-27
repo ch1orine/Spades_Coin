@@ -96,6 +96,17 @@ export default class GameConfig {
         return fullLang.split(/[-_]/)[0].toLowerCase();
     }
     
+    public getURL_APP_STORE(): string {
+        return this.configData && typeof this.configData.URL_APPSTORE === 'string'
+            ? this.configData.URL_APPSTORE
+            : '';
+    }
+
+    public getURL_GOOGLE_PLAY(): string {
+        return this.configData && typeof this.configData.URL_GOOGLE_PLAY === 'string'
+            ? this.configData.URL_GOOGLE_PLAY
+            : '';
+    }
 }
 
 // 单例并暴露到全局，兼容旧代码 window.gameConfig 的用法

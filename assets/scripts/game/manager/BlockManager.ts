@@ -81,8 +81,12 @@ export class BlockManager {
 
   public getGuidePos() {    
     const positions = this.BlockManagerBll.getPassableBlocks(this);
-    if (positions.length > 0) {
+    if (positions.length > 0 && positions[0].x !== 0) {
       EventBus.instance.emit(GuideEvent.ShowHand, positions);    
+    }else{
+      setTimeout(() => {
+          this.getGuidePos();
+      }, 100);
     }
   }
 }

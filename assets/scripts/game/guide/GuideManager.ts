@@ -48,11 +48,13 @@ export class GuideManager {
     EventBus.instance.on(GuideEvent.StopShowGuide, this.stopGuideShow, this);
   }
 
-  public showGuide(pos:Vec3[]){    
+  public showGuide(pos:Vec3[]){ 
+    
     if (this._hand){          
       this._hand.active = true;
       this._mask.active = true;
       this._hand.setPosition(pos[0].x + this._offset, pos[0].y - this._offset, 0);
+      console.log("show guide at ", pos[0].x + this._offset, pos[0].y - this._offset, 0);
       const opacity = this._hand.getComponent(UIOpacity);
       opacity.opacity = 255;
 
