@@ -6,6 +6,7 @@ import { BlockEvent } from "../../block/BlockEvent";
 import { JumpEvent } from "../../jump/JumpEvent";
 import { BlockManagerEvent } from "../BlockManagerEvent";
 import { GuideEvent } from "../../guide/GuideEven";
+import { Sound } from "../../../sound/Sound";
 
 export class BlockManagerBll {
   /** 创建砖块对象 */
@@ -66,6 +67,7 @@ export class BlockManagerBll {
       b2.wipeEffect();  
       b1.stopResponse();
       b2.stopResponse();
+      Sound.ins.playOneShot(Sound.effect.wipe);
       EventBus.instance.emit(EventBus.UpdateTimer);
     }
     else {

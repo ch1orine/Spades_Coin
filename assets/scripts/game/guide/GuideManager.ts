@@ -33,6 +33,10 @@ export class GuideManager {
         }
         this._mask = instantiate(prefab);
         this._mask.parent = mapNode;
+        this._mask.setPosition(0,170,0);
+        const ui = this._mask.getComponent(UITransform);
+        ui.width = 170;
+        ui.height = 85;
         this._mask.active = false; 
         EventBus.instance.emit(GuideEvent.GetGuideBlocks);       
     });  

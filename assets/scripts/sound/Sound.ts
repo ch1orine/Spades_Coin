@@ -9,11 +9,7 @@ export class Sound {
         bgm: "audio/bgm/bgm",
     }
     public static effect = {
-        place: "audio/effect/place",   //放置麻将
-        click: "audio/effect/click",   //点击
         wipe: "audio/effect/wipe",   //擦除
-        new: "audio/effect/new",     //新关卡
-        end: "audio/effect/end",   //结束
     }
 
     private static _curMusic: string = "";

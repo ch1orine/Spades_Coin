@@ -31,11 +31,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 33
+        "__id__": 35
       }
     ],
     "_prefab": {
-      "__id__": 35
+      "__id__": 37
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -288,17 +288,17 @@
         "__id__": 13
       },
       {
-        "__id__": 21
+        "__id__": 23
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 30
+        "__id__": 32
       }
     ],
     "_prefab": {
-      "__id__": 32
+      "__id__": 34
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -348,15 +348,18 @@
       },
       {
         "__id__": 18
+      },
+      {
+        "__id__": 20
       }
     ],
     "_prefab": {
-      "__id__": 20
+      "__id__": 22
     },
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 614.8,
+      "y": 610,
       "z": 0
     },
     "_lrot": {
@@ -396,8 +399,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 613.849853515625,
-      "height": 50.4
+      "width": 680,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -432,17 +435,17 @@
       "b": 36,
       "a": 255
     },
-    "_string": "Find pairs and tens of 10",
+    "_string": "Finde Paare oder Zahlen, die zusammen 10 ergeben",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 50,
+    "_actualFontSize": 37,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
-    "_overflow": 0,
+    "_overflow": 2,
     "_enableWrapText": true,
     "_font": {
-      "__uuid__": "c90880bc-311d-4d19-a0fd-315d741aa1dc",
+      "__uuid__": "3a7c2253-41ae-4593-8ca6-14ea7d775c58",
       "__expectedType__": "cc.TTFFont"
     },
     "_isSystemFontUsed": false,
@@ -518,6 +521,25 @@
     "fileId": "cbWLkyovJG1oKgE4psQbKH"
   },
   {
+    "__type__": "edf98QH2D1AUoCrtQlbxFrU",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 13
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 21
+    },
+    "key": "main.name",
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "9an+VdSxFIsIavSM99Zz9p"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -537,14 +559,14 @@
       "__id__": 12
     },
     "_prefab": {
-      "__id__": 22
+      "__id__": 24
     },
     "__editorExtras__": {}
   },
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 21
+      "__id__": 23
     },
     "asset": {
       "__uuid__": "1aa29935-4853-4d02-bd8e-22a21427ac6f",
@@ -552,7 +574,7 @@
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
     "instance": {
-      "__id__": 23
+      "__id__": 25
     },
     "targetOverrides": null
   },
@@ -566,19 +588,19 @@
     "mountedComponents": [],
     "propertyOverrides": [
       {
-        "__id__": 24
-      },
-      {
         "__id__": 26
-      },
-      {
-        "__id__": 27
       },
       {
         "__id__": 28
       },
       {
         "__id__": 29
+      },
+      {
+        "__id__": 30
+      },
+      {
+        "__id__": 31
       }
     ],
     "removedComponents": []
@@ -586,7 +608,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 25
+      "__id__": 27
     },
     "propertyPath": [
       "_name"
@@ -602,7 +624,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 25
+      "__id__": 27
     },
     "propertyPath": [
       "_lpos"
@@ -617,7 +639,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 25
+      "__id__": 27
     },
     "propertyPath": [
       "_lrot"
@@ -633,7 +655,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 25
+      "__id__": 27
     },
     "propertyPath": [
       "_euler"
@@ -648,7 +670,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 25
+      "__id__": 27
     },
     "propertyPath": [
       "_active"
@@ -665,7 +687,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 31
+      "__id__": 33
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -706,7 +728,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 34
+      "__id__": 36
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -737,7 +759,7 @@
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": [
       {
-        "__id__": 21
+        "__id__": 23
       }
     ]
   }

@@ -6,6 +6,7 @@ import super_html_playable from "./common/super_html_playable";
 import { EventBus } from "./event/EventBus";
 import { GuideManager } from "./game/guide/GuideManager";
 import { GuideEvent } from "./game/guide/GuideEven";
+import * as i18n from 'db://i18n/LanguageData';
 const { ccclass } = _decorator;
 
 @ccclass("Main")
@@ -22,9 +23,11 @@ export class Main extends Component {
     gameConfig.loadConfig().then(() => {
       this.adaptPlayable();
       this.init();
+      i18n.init(gameConfig.getSimplifiedLanguage()); // 设置为配置语言
     });
 
     EventBus.instance.on(EventBus.UpdateTimer, this.checkTimer, this);
+    EventBus.instance.on(EventBus.GameOver, this.onGameOver, this);
   }
 
   adaptPlayable() {
@@ -56,6 +59,15 @@ export class Main extends Component {
       const guide = new GuideManager();
       // guide.init();
     });
+
+    resources.load("prefabs/skip", Prefab, (err, prefab) => {
+      if (err) {
+        console.error(err);
+      }
+      const node = instantiate(prefab);
+      node.parent = this.node;
+      node.setSiblingIndex(1);
+    });
   }
 
   private checkTimer(){
@@ -68,5 +80,11 @@ export class Main extends Component {
       this._begin = false;
       EventBus.instance.emit(GuideEvent.GetGuideBlocks); 
     }
+  }
+
+  private onGameOver(){
+    console.log("游戏结束");
+    this._begin = false;
+    EventBus.instance.off(EventBus.UpdateTimer, this.checkTimer, this);
   }
 }
