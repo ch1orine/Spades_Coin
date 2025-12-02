@@ -53,7 +53,7 @@ export class GridBoard extends Component {
         this.rows * this.cellSize
       );
     }
-    this.lineColor = Color.fromHEX(new Color(), gameConfig.getColor());
+    this.lineColor = Color.fromHEX(new Color(), gameConfig.getGridColor());
     
     EventBus.instance.on(GridEvent.WipeGrid, this.removeLines3x3, this);
     

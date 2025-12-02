@@ -435,10 +435,10 @@
       "b": 36,
       "a": 255
     },
-    "_string": "Finde Paare oder Zahlen, die zusammen 10 ergeben",
+    "_string": "找出數字對與和為10的數字對",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 37,
+    "_actualFontSize": 51,
     "_fontSize": 50,
     "_fontFamily": "Arial",
     "_lineHeight": 40,

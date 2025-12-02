@@ -34,17 +34,10 @@ export default class GameConfig {
         return this.configData ? (this.configData[key] as T) : null;
     }
 
-    /** 是否三步就跳转下载链接 */
-    public getThreeSteps(): boolean {
-        return this.configData && typeof this.configData.threeStepS === 'boolean'
-            ? this.configData.threeStepS
-            : false;
-    }
-
     /** 获取测试选择值 */
     public getStepsToJump(): number {
-        return this.configData && typeof this.configData.stepsToJump === 'number'
-            ? this.configData.stepsToJump
+        return this.configData && typeof this.configData.step === 'number'
+            ? this.configData.step
             : 0;
     }
 
@@ -56,10 +49,40 @@ export default class GameConfig {
     }
 
 
-    public getColor(): string {
-        return this.configData && typeof this.configData.color === 'string'
-            ? this.configData.color
+    public getNumberColor(): string {
+        return this.configData && typeof this.configData.numbercolor === 'string'
+            ? this.configData.numbercolor
             : '#FFFFFF';
+    }
+
+    public getGridColor(): string {
+        return this.configData && typeof this.configData.gridcolor === 'string'
+            ? this.configData.gridcolor
+            : '#000000';
+    }
+
+    public getBGColor(): string {
+        return this.configData && typeof this.configData.bgcolor === 'string'
+            ? this.configData.bgcolor
+            : '#FFFFFF';
+    }
+
+    public getTitleColor(): string {
+        return this.configData && typeof this.configData.titlecolor === 'string'
+            ? this.configData.titlecolor
+            : '#000000';
+    }
+
+    public getWipeColor(): string {
+        return this.configData && typeof this.configData.wipecolor === 'string'
+            ? this.configData.wipecolor
+            : '#FFFFFF';
+    }
+
+    public getGuideColor(): string {
+        return this.configData && typeof this.configData.guidecolor === 'string'
+            ? this.configData.guidecolor
+            : '#000000';
     }
 
     /** 

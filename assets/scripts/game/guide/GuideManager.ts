@@ -1,7 +1,8 @@
-import { _decorator, Component, director, instantiate, Node, Prefab, resources, Tween, tween, UIOpacity, UITransform, v3, Vec3 } from "cc";
+import { _decorator, director, instantiate, Node, Prefab, resources, Tween, tween, UIOpacity, UITransform, v3, Vec3, Sprite, Color} from "cc";
 import { GuideEvent } from "./GuideEven";
 import { EventBus } from "../../event/EventBus";
-const { ccclass, property } = _decorator;
+import { gameConfig } from "../../common/GameConfig";
+const { ccclass } = _decorator;
 
 @ccclass("Guide")
 export class GuideManager {
@@ -38,6 +39,8 @@ export class GuideManager {
         ui.width = 170;
         ui.height = 85;
         this._mask.active = false; 
+        const sp = this._mask.getComponent(Sprite);
+        sp.color = Color.fromHEX(new Color(),gameConfig.getGuideColor());
         EventBus.instance.emit(GuideEvent.GetGuideBlocks);       
     });  
             
@@ -53,8 +56,7 @@ export class GuideManager {
     if (this._hand){          
       this._hand.active = true;
       this._mask.active = true;
-      this._hand.setPosition(pos[0].x + this._offset, pos[0].y - this._offset, 0);
-      console.log("show guide at ", pos[0].x + this._offset, pos[0].y - this._offset, 0);
+      this._hand.setPosition(pos[0].x + this._offset, pos[0].y - this._offset, 0);      
       const opacity = this._hand.getComponent(UIOpacity);
       opacity.opacity = 255;
 

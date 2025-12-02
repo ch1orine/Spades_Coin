@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Prefab, resources } from "cc";
+import { _decorator, Camera, Color, Component, instantiate, Label, Prefab, resources } from "cc";
 import { BlockManager } from "./game/manager/BlockManager";
 import { gameConfig } from "./common/GameConfig";
 import { Sound } from "./sound/Sound";
@@ -7,7 +7,7 @@ import { EventBus } from "./event/EventBus";
 import { GuideManager } from "./game/guide/GuideManager";
 import { GuideEvent } from "./game/guide/GuideEven";
 import * as i18n from 'db://i18n/LanguageData';
-const { ccclass } = _decorator;
+const { ccclass, property } = _decorator;
 
 @ccclass("Main")
 export class Main extends Component {
@@ -17,6 +17,9 @@ export class Main extends Component {
   private _intervalTime: number = 2000; //2秒检查一次时间
 
   private _begin:boolean = false;
+
+  @property(Camera)
+  camera: Camera;
 
   private readonly URL_APPSTORE= "https://apps.apple.com/us/app/number-match-fun-puzzle-game/id6473832648";
   private readonly URL_GOOGLE_PLAY= "https://play.google.com/store/apps/details?id=daily.number.match.free.puzzle"
@@ -51,6 +54,7 @@ export class Main extends Component {
       const node = instantiate(prefab);
       node.parent = this.node;
       node.setSiblingIndex(0);
+      node.children[2].children[0].getComponent(Label).color = Color.fromHEX(new Color(), gameConfig.getTitleColor());
       EventBus.instance.on(EventBus.GameOver, () => {
         node.pauseSystemEvents(true);
       });
@@ -68,6 +72,8 @@ export class Main extends Component {
       node.parent = this.node;
       node.setSiblingIndex(1);
     });
+
+    this.camera.clearColor = Color.fromHEX(new Color(), gameConfig.getBGColor());
   }
 
   private checkTimer(){

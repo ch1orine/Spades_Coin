@@ -35,12 +35,11 @@ export class Jump extends Component {
   }
 
   onStep() {
-    this._steps++;
-    console.log("跳转步骤:", this._steps);
-    if (gameConfig.getThreeSteps() && this._steps >= gameConfig.getStepsToJump()) {
-      EventBus.instance.emit(EventBus.GameOver); //游戏结束 
+    this._steps++;    
+    if (this._steps >= gameConfig.getStepsToJump()) {
       this.onHandler();
       super_html_playable.game_end() //用插件跳转商店下载页
+      EventBus.instance.emit(EventBus.GameOver); //游戏结束 
     }
   }
 

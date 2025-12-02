@@ -1,6 +1,10 @@
 {    
-  "threeStepS": true,
-  "stepsToJump": 5,
-  "testStr": "测试字符串",
-  "color":"#4F3B93"
+  "step": 5,
+  "testStr": "3507",
+  "numbercolor":"#4F3B93",
+  "gridcolor":"#4F3B93",
+  "bgcolor":"#F2E8B9",
+  "titlecolor":"#D95C24",
+  "guidecolor":"#D95C24",
+  "wipecolor":"#F2E8B9"
 }
