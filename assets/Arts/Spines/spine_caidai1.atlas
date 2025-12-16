@@ -1,0 +1,104 @@
+
+spine_caidai1.png
+size: 155,267
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+images/1
+  rotate: false
+  xy: 2, 97
+  size: 145, 80
+  orig: 145, 80
+  offset: 0, 0
+  index: -1
+images/10
+  rotate: false
+  xy: 126, 31
+  size: 19, 36
+  orig: 19, 36
+  offset: 0, 0
+  index: -1
+images/11
+  rotate: false
+  xy: 2, 13
+  size: 35, 40
+  orig: 35, 40
+  offset: 0, 0
+  index: -1
+images/12
+  rotate: false
+  xy: 65, 25
+  size: 32, 36
+  orig: 32, 36
+  offset: 0, 0
+  index: -1
+images/13
+  rotate: false
+  xy: 2, 55
+  size: 43, 40
+  orig: 43, 40
+  offset: 0, 0
+  index: -1
+images/14
+  rotate: false
+  xy: 47, 63
+  size: 43, 32
+  orig: 43, 32
+  offset: 0, 0
+  index: -1
+images/2
+  rotate: false
+  xy: 138, 78
+  size: 11, 17
+  orig: 11, 17
+  offset: 0, 0
+  index: -1
+images/3
+  rotate: true
+  xy: 39, 2
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+images/4
+  rotate: true
+  xy: 92, 69
+  size: 26, 44
+  orig: 26, 44
+  offset: 0, 0
+  index: -1
+images/5
+  rotate: false
+  xy: 99, 37
+  size: 25, 30
+  orig: 25, 30
+  offset: 0, 0
+  index: -1
+images/6
+  rotate: false
+  xy: 2, 179
+  size: 151, 86
+  orig: 151, 86
+  offset: 0, 0
+  index: -1
+images/7
+  rotate: false
+  xy: 99, 17
+  size: 19, 18
+  orig: 19, 18
+  offset: 0, 0
+  index: -1
+images/8
+  rotate: true
+  xy: 65, 9
+  size: 14, 17
+  orig: 14, 17
+  offset: 0, 0
+  index: -1
+images/9
+  rotate: true
+  xy: 39, 16
+  size: 37, 24
+  orig: 37, 24
+  offset: 0, 0
+  index: -1

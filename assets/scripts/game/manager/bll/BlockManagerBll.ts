@@ -18,12 +18,12 @@ export class BlockManagerBll {
       const node = instantiate(prefab);
       node.name = `block_${data.row * 8 + data.col}`;
       const block = node.getComponent(Block);
-      node.parent = find("gui");
+      node.parent = find("gui/game/LayerGame");
       block.model.id = data.id;
       block.model.row = data.row;
       block.model.col = data.col;
-      block.view.candrag = data.drag === 1 ? true : false;
       block.load(find("gui/game/LayerGame"), v3((data.col - 3.5) * 85, (6 - data.row) * 85, 0));
+      block.view.candrag = data.drag === 1 ? true : false;
       e.BlockManagerModel.blocks.push(block);
     });
   }

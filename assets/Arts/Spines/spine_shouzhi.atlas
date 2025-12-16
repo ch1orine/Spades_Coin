@@ -1,0 +1,13 @@
+
+spine_shouzhi.png
+size: 362,560
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/finger
+  rotate: false
+  xy: 2, 2
+  size: 358, 556
+  orig: 361, 557
+  offset: 0, 0
+  index: -1

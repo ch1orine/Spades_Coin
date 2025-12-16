@@ -49,7 +49,7 @@ export class Block extends Component {
 
         this.view.sprite.spriteFrame = sf;
         this.view.sprite.color = Color.fromHEX(new Color(), gameConfig.getNumberColor());
-        this.node.parent = parent;
+        // this.node.parent = parent;
         this.node.setPosition(pos);
       }
     );

@@ -7,6 +7,7 @@ import { EventBus } from "./event/EventBus";
 import { GuideManager } from "./game/guide/GuideManager";
 import { GuideEvent } from "./game/guide/GuideEven";
 import * as i18n from 'db://i18n/LanguageData';
+import { CubeManager } from "./game/manager/CubeManager";
 const { ccclass, property } = _decorator;
 
 @ccclass("Main")
@@ -54,11 +55,11 @@ export class Main extends Component {
       const node = instantiate(prefab);
       node.parent = this.node;
       node.setSiblingIndex(0);
-      node.children[2].children[0].getComponent(Label).color = Color.fromHEX(new Color(), gameConfig.getTitleColor());
+      // node.children[2].children[0].getComponent(Label).color = Color.fromHEX(new Color(), gameConfig.getTitleColor());
       EventBus.instance.on(EventBus.GameOver, () => {
         node.pauseSystemEvents(true);
       });
-      const manager = new BlockManager();
+      const manager = new CubeManager();
       manager.init();
       const guide = new GuideManager();
       // guide.init();

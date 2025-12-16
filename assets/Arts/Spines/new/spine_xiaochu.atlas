@@ -1,0 +1,104 @@
+
+spine_xiaochu.png
+size: 415,150
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/glow
+  rotate: true
+  xy: 301, 9
+  size: 63, 62
+  orig: 63, 62
+  offset: 0, 0
+  index: -1
+images/hua
+  rotate: true
+  xy: 2, 55
+  size: 93, 88
+  orig: 93, 88
+  offset: 0, 0
+  index: -1
+images/huaban1
+  rotate: true
+  xy: 215, 2
+  size: 68, 84
+  orig: 68, 84
+  offset: 0, 0
+  index: -1
+images/huaban2
+  rotate: true
+  xy: 68, 5
+  size: 48, 56
+  orig: 48, 56
+  offset: 0, 0
+  index: -1
+images/huaban3
+  rotate: false
+  xy: 2, 6
+  size: 64, 47
+  orig: 64, 47
+  offset: 0, 0
+  index: -1
+images/huaban4
+  rotate: false
+  xy: 365, 35
+  size: 38, 24
+  orig: 38, 24
+  offset: 0, 0
+  index: -1
+images/huaban5
+  rotate: false
+  xy: 365, 61
+  size: 48, 32
+  orig: 48, 32
+  offset: 0, 0
+  index: -1
+images/huangyezi1
+  rotate: false
+  xy: 274, 74
+  size: 55, 74
+  orig: 55, 74
+  offset: 0, 0
+  index: -1
+images/huangyezi2
+  rotate: true
+  xy: 377, 98
+  size: 50, 24
+  orig: 50, 24
+  offset: 0, 0
+  index: -1
+images/huangyezi3
+  rotate: true
+  xy: 365, 11
+  size: 22, 37
+  orig: 22, 37
+  offset: 0, 0
+  index: -1
+images/huangyezi4
+  rotate: true
+  xy: 331, 95
+  size: 53, 44
+  orig: 53, 44
+  offset: 0, 0
+  index: -1
+images/yezi1
+  rotate: false
+  xy: 191, 72
+  size: 81, 76
+  orig: 81, 76
+  offset: 0, 0
+  index: -1
+images/yezi2
+  rotate: false
+  xy: 126, 10
+  size: 87, 58
+  orig: 87, 58
+  offset: 0, 0
+  index: -1
+images/yezipang
+  rotate: false
+  xy: 92, 70
+  size: 97, 78
+  orig: 97, 78
+  offset: 0, 0
+  index: -1

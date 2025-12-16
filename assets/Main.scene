@@ -335,7 +335,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.UITransform",
@@ -415,6 +415,9 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "camera": {
+      "__id__": 4
+    },
     "_id": "79Ye2M2DlKdICCizk1GxWn"
   },
   {

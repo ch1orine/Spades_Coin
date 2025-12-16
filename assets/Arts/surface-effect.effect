@@ -1,0 +1,40 @@
+// 【示例代码 1.1】
+
+CCEffect %{
+  techniques:
+  - name: dye-demo
+    passes:
+    - vert: vs:vert
+      frag: fs:frag
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha  
+}%
+
+
+CCProgram vs %{
+  precision highp float;
+  #include <cc-global>
+
+  in vec3 a_position;
+  
+  vec4 vert() {
+    vec4 pos = vec4(a_position, 1);
+    return cc_matViewProj * pos;
+  }
+}%
+
+CCProgram fs %{
+  precision highp float;
+
+  vec4 frag() {
+    return vec4(0.0, 1.0, 0.0, 0.5);
+  }
+}%
+
+作者：VaJoy
+链接：https://juejin.cn/post/7514467937602158607
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

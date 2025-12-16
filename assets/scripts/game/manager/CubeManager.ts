@@ -1,0 +1,60 @@
+import { _decorator, Component, Node } from "cc";
+import { CubeManagerBll } from "./bll/CubeManagerBll";
+import { CubeManagerView } from "./view/CubeManagerView";
+import { EventBus } from "../../event/EventBus";
+import { CubeManagerEvent } from "./CubeManagerEvent";
+import { CubeManagerModel } from "./model/CubeManagerModel";
+import { CubeEvent } from "../cube/CubeEvent";
+import { Cube } from "../cube/Cube";
+const { ccclass, property } = _decorator;
+
+@ccclass("CubeManager")
+export class CubeManager {
+  //数据层
+  CubeManagerModel!: CubeManagerModel;
+
+  //业务层
+  CubeManagerBll!: CubeManagerBll;
+
+  //视图层
+  CubeManagerView!: CubeManagerView;
+
+
+/**
+ *
+ */
+constructor() {
+    this.CubeManagerModel = new CubeManagerModel();
+    this.CubeManagerBll = new CubeManagerBll();
+    this.CubeManagerView = new CubeManagerView();    
+}
+
+  init() {
+    this.generateBoardLayout();
+    this.addEvents();
+  }
+
+  public generateBoardLayout() {
+    for (let r = 0; r < this.CubeManagerModel.map.length; r++) {
+      for (let c = 0; c < this.CubeManagerModel.map[r].length; c++) {
+        if (this.CubeManagerModel.map[r][c] === 0) continue;
+        this.CubeManagerBll.createCube(this, {
+          id: this.CubeManagerModel.map[r][c],
+          row: r,
+          col: c,
+        });
+      }
+    }
+  }
+
+  private addEvents() {
+    EventBus.instance.on(CubeEvent.onCubeClick, this.onCubeClick, this);
+    EventBus.instance.on("2", function () {}, this);
+    EventBus.instance.on("2", function () {}, this);
+  }
+
+  private onCubeClick(callback:(dir:number)=>void) {
+    // console.log("点击了麻将", cube.model);
+    this.CubeManagerBll.checkCubeMovable(this, callback);
+  }
+}
