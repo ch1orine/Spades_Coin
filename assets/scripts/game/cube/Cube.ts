@@ -31,7 +31,8 @@ export class Cube extends Component {
             }            
             this.view.sprite.spriteFrame = sf;
             this.node.parent = parent;
-            this.node.setPosition(pos);  
+            this.node.setPosition(pos);
+            this.view.initOriginalPos();
             this.geneAnim();          
         });
     }
@@ -50,12 +51,15 @@ export class Cube extends Component {
     /** 抖动动画 */
     shakeAnim(){
         tween(this.node)
-        .to(0.1,{angle:8})
-        .to(0.1,{angle:-8})
-        .to(0.1,{angle:0})        
+        .to(0.06,{angle:10})
+        .to(0.06,{angle:-10})
+        .union()        
+        .repeat(2)
+        .to(0.1,{angle:0})
         .start();
     }
 
+    updateCube
     /** 消除动画 */
 }
 

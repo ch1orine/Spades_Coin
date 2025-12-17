@@ -8,6 +8,17 @@ export class CubeManagerModel {
 
   private _map: number[][];
 
+  public readonly SIZE: number = 118;
+
+  public readonly OFFSET_COL: number = 2.5;
+  
+  public readonly OFFSET_ROW: number = 3;
+
+  public get map(): number[][] {
+    return this._map;
+  }
+
+   
   constructor() {
     this._map = [
       [41, 31, 0, 31, 0, 0],
@@ -20,11 +31,6 @@ export class CubeManagerModel {
       [21, 0, 0, 0, 0, 0],
     ];
   }
-
-  public get map(): number[][] {
-    return this._map;
-  }
-
 
   /** 获取格子值
    * @param row 横坐标
@@ -65,4 +71,9 @@ export class CubeManagerModel {
   getCube(row: number, col: number): Cube {
     return this.cubes.find((cube) => cube.model.row === row && cube.model.col === col);
   }
+
+  getCubesById(id: number): Cube[] {
+    return this.cubes.filter((cube) => cube.model.id === id);    
+  }
+
 }

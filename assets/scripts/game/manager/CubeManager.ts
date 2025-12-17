@@ -49,12 +49,22 @@ constructor() {
 
   private addEvents() {
     EventBus.instance.on(CubeEvent.onCubeClick, this.onCubeClick, this);
+    EventBus.instance.on(CubeEvent.onShakeCube, this.onShakeCubes, this);
     EventBus.instance.on("2", function () {}, this);
     EventBus.instance.on("2", function () {}, this);
   }
 
-  private onCubeClick(callback:(dir:number)=>void) {
+  private onCubeClick(node: Node, callback:(data:any)=>void) {
     // console.log("点击了麻将", cube.model);
-    this.CubeManagerBll.checkCubeMovable(this, callback);
+    this.CubeManagerBll.checkCubeMovable(this, node, callback);
+  }
+
+  private onShakeCubes(node:Node) {
+    const cube = node.getComponent(Cube);
+    const id = cube?.model.id || 0;
+    const cubes = this.CubeManagerModel.getCubesById(id);
+    cubes.forEach((cube)=>{
+      cube.shakeAnim();
+    });
   }
 }
