@@ -50,8 +50,9 @@ constructor() {
   private addEvents() {
     EventBus.instance.on(CubeEvent.onCubeClick, this.onCubeClick, this);
     EventBus.instance.on(CubeEvent.onShakeCube, this.onShakeCubes, this);
-    EventBus.instance.on("2", function () {}, this);
-    EventBus.instance.on("2", function () {}, this);
+    EventBus.instance.on(CubeEvent.onFollowCube, this.onFollowCube, this);
+    EventBus.instance.on(CubeEvent.onCubeDragEnd, this.onCubeDragEnd, this);
+    EventBus.instance.on(CubeEvent.onCubeReturn, this.onCubeReturn, this);
   }
 
   private onCubeClick(node: Node, callback:(data:any)=>void) {
@@ -66,5 +67,18 @@ constructor() {
     cubes.forEach((cube)=>{
       cube.shakeAnim();
     });
+  }
+
+
+  private onFollowCube(data: any) {
+    this.CubeManagerBll.followCube(this, data.node, data.isHorizontal, data.delta);
+  }
+
+  private onCubeDragEnd() {
+    this.CubeManagerBll.checkMovedCubes(this);
+  }
+
+  private onCubeReturn() {
+    this.CubeManagerBll.returnOrigin();//被移动的麻将回到原位
   }
 }

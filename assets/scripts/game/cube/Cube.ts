@@ -59,6 +59,11 @@ export class Cube extends Component {
         .start();
     }
 
+
+    rePosAnim() {
+    this.view.rePosAnim();
+  }
+
     updateCube
     /** 消除动画 */
 }
