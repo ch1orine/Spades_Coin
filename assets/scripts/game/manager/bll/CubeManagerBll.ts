@@ -12,15 +12,16 @@ import {
 } from "cc";
 import { CubeManager } from "../CubeManager";
 import { Cube } from "../../cube/Cube";
-import { constants } from "buffer";
 const { ccclass, property } = _decorator;
 
 @ccclass("CubeManagerBll")
 export class CubeManagerBll extends Component {
   
-  private _hCubes: Cube[] = [];
+  private _hLCubes: Cube[] = [];
+  private _hRCubes: Cube[] = [];
   
-  private _vCubes: Cube[] = [];
+  private _vUCubes: Cube[] = [];
+  private _vDCubes: Cube[] = [];
 
   /** 创建麻将实体
    * @param e CubeManager实例
@@ -163,7 +164,6 @@ export class CubeManagerBll extends Component {
   }
 
 
-
   /** 麻将跟随移动
    * @param e CubeManager实例
    * @param node 被移动的麻将节点
@@ -177,52 +177,79 @@ export class CubeManagerBll extends Component {
     // const val = cube.model.id;
     const res = this.getMaxReachableInDirections(e, row, col);        
     if (isHorizontal) {
-      this._vCubes.forEach(cube => {
+      // console.log(this._hLCubes[0]);
+      this._vUCubes.forEach(cube => {
         cube.rePosAnim();
       });
-      this._vCubes = [];
-      this._hCubes = [];
+      this._vDCubes.forEach(cube => {
+        cube.rePosAnim();
+      });
+      this._vUCubes = [];
+      this._vDCubes = [];      
       node.setWorldPosition(newPos, cube.view.originWorldPos.y, 0);
       if (newPos - cube.view.originWorldPos.x > 0) {
-        // 向右移动        
+        // 向右移动 
+        this._hRCubes = [];
+        this._hLCubes.forEach(cube => {
+          cube.rePosAnim();
+        });
+        this._hLCubes = [];        
+
         for (let i = 0; i < res.right.pushCount; i++) {
-          const movedCube = e.CubeManagerModel.getCube(row, col + i + 1);
-          this._hCubes.push(movedCube);
-          console.log("向右移动", movedCube.name);
+          const movedCube = e.CubeManagerModel.getCube(row, col + i + 1);          
+          this._hRCubes.push(movedCube);          
           movedCube.node.setWorldPosition(
-            newPos + e.CubeManagerModel.SIZE * (i + 1), movedCube.node.getWorldPosition().y,0);            
+            newPos + e.CubeManagerModel.SIZE * (i + 1), movedCube.node.getWorldPosition().y, 0);            
           }               
       } else {
         // 向左移动
+        this._hLCubes = [];
+        this._hRCubes.forEach(cube => {
+          cube.rePosAnim();
+        });
+        this._hRCubes = [];
+
         for (let i = 0; i < res.left.pushCount; i++) {
-          const movedCube = e.CubeManagerModel.getCube(row, col - i - 1);
-          console.log("向左移动", movedCube.name);
-          this._hCubes.push(movedCube);
-          console.log("向左移动", movedCube.name);
+          const movedCube = e.CubeManagerModel.getCube(row, col - i - 1);          
+          this._hLCubes.push(movedCube);          
           movedCube.node.setWorldPosition(newPos - e.CubeManagerModel.SIZE * (i + 1), movedCube.node.getWorldPosition().y,0);            
         }                
       }
     } 
     else {
-      this._hCubes.forEach(cube => {
+      this._hLCubes.forEach(cube => {
         cube.rePosAnim();
       });
-      this._hCubes = [];
-      this._vCubes = [];
+      this._hRCubes.forEach(cube => {
+        cube.rePosAnim();
+      });
+      this._hLCubes = [];
+      this._hRCubes = [];
+      // this._vCubes = [];
       node.setWorldPosition(cube.view.originWorldPos.x, newPos, 0);
       if (newPos - cube.view.originWorldPos.y > 0) {
         // 向上移动
+        this._vUCubes = [];
+        this._vDCubes.forEach(cube => {
+          cube.rePosAnim();
+        });
+        this._vDCubes = [];
         for (let i = 0; i < res.up.pushCount; i++) {
           const movedCube = e.CubeManagerModel.getCube(row - i - 1, col);
-          this._vCubes.push(movedCube);
-          movedCube.node.setWorldPosition( movedCube.node.getWorldPosition().x, newPos + e.CubeManagerModel.SIZE * (i + 1),0);
+          this._vUCubes.push(movedCube);
+          movedCube.node.setWorldPosition(movedCube.node.getWorldPosition().x, newPos + e.CubeManagerModel.SIZE * (i + 1), 0);
         }                  
       } else {
         // 向下移动
+        this._vDCubes = [];
+        this._vUCubes.forEach(cube => {
+          cube.rePosAnim();
+        });
+        this._vUCubes = [];
         for (let i = 0; i < res.down.pushCount; i++) {
           const movedCube = e.CubeManagerModel.getCube(row + i + 1, col);
-          this._vCubes.push(movedCube);
-          movedCube.node.setWorldPosition( movedCube.node.getWorldPosition().x, newPos - e.CubeManagerModel.SIZE * (i + 1),0);            
+          this._vDCubes.push(movedCube);
+          movedCube.node.setWorldPosition(movedCube.node.getWorldPosition().x, newPos - e.CubeManagerModel.SIZE * (i + 1), 0);            
         }                
       }
     }
@@ -234,66 +261,191 @@ export class CubeManagerBll extends Component {
    * @param node 被移动的麻将节点
    */
   public pairCube(e: CubeManager, node: Node) {
+
     const cube = node.getComponent(Cube);
     const h = cube.view.originWorldPos.y == node.getWorldPosition().y;
     const bclick = Vec3.squaredDistance(cube.view.originWorldPos, node.getWorldPosition()) < e.CubeManagerModel.MOVE_TOLERANCE;
     const row = Math.round(e.CubeManagerModel.OFFSET_ROW - node.getPosition().y / e.CubeManagerModel.SIZE);
     const col = Math.round(node.getPosition().x / e.CubeManagerModel.SIZE + e.CubeManagerModel.OFFSET_COL);
+    const newPos = this.getPosByRowCol(e, row, col);
     const val = cube.model.id;
-    const res = this.getReachablePos(e, row, col);
-    if (!bclick){
+    const rowDelta = row - cube.model.row;
+    const colDelta = col - cube.model.col;
+    const res = this.getReachablePos(e, row, col);    
+    //滑动配对
+    if (!bclick) {
       if (h) {          
-          if (e.CubeManagerModel.getMapValue(row - res.up, col) === val ){
-              console.log("配对成功-水平");
-              node.active = false;
-              e.CubeManagerModel.getCube(row - res.up, col).node.active = false;
+          if (e.CubeManagerModel.getMapValue(row - res.up, col) === val ){              
+
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row - res.up, col).node.active = false;
+              node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              console.log("配了")
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row - res.up, col));
+
               e.CubeManagerModel.updateMapValueByCube(cube);
-              e.CubeManagerModel.updateMapValue(row - res.up, col);              
+              e.CubeManagerModel.updateMapValue(row - res.up, col);
+              
+              this._hLCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, 0, colDelta);
+                  this.pairCube(e, cube.node);
+                });
+              this._hRCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, 0, colDelta);
+                  this.pairCube(e, cube.node);
+                });
+                           
           } 
-           else if (e.CubeManagerModel.getMapValue(row + res.down, col) === val) {
-              console.log("配对成功-水平");
-              node.active = false;
-              e.CubeManagerModel.getCube(row + res.down, col).node.active = false;
+          else if (e.CubeManagerModel.getMapValue(row + res.down, col) === val) {              
+
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row + res.down, col).node.active = false;
+              node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row + res.down, col));
+
               e.CubeManagerModel.updateMapValueByCube(cube);
               e.CubeManagerModel.updateMapValue(row + res.down, col);
+
+              
+              this._hLCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, 0, colDelta);
+                  this.pairCube(e, cube.node);
+                });
+              this._hRCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, 0, colDelta);  
+                  this.pairCube(e, cube.node);
+                });
+               
+          }
+          else{
+            cube.rePosAnim();
           }
       }
       else{
-          if (e.CubeManagerModel.getMapValue(row, col - res.left) === val){
-              console.log("配对成功-垂直");
-              node.active = false;
-              e.CubeManagerModel.getCube(row, col - res.left).node.active = false;
+          if (e.CubeManagerModel.getMapValue(row, col - res.left) === val){              
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row, col - res.left).node.active = false;
+              node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row, col - res.left));
+
               e.CubeManagerModel.updateMapValueByCube(cube);
               e.CubeManagerModel.updateMapValue(row, col - res.left);
+
+              
+              this._vUCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, rowDelta, 0);
+                  this.pairCube(e, cube.node);
+                });
+              this._vDCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, rowDelta, 0);
+                  this.pairCube(e, cube.node);
+                })
+              
           } 
-          else if (e.CubeManagerModel.getMapValue(row, col + res.right) === val) {
-              console.log("配对成功-垂直");
-              node.active = false;
+          else if (e.CubeManagerModel.getMapValue(row, col + res.right) === val) {              
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row, col + res.right).node.active = false;
+              node.setPosition(newPos); 
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row, col + res.right));
+
               e.CubeManagerModel.updateMapValueByCube(cube);
-              e.CubeManagerModel.getCube(row, col + res.right).node.active = false;
-              e.CubeManagerModel.updateMapValue(row, col + res.right);              
+              e.CubeManagerModel.updateMapValue(row, col + res.right);  
+
+              
+              this._vUCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, rowDelta, 0);
+                  this.pairCube(e, cube.node);
+                });
+              this._vDCubes.forEach(cube => {
+                  this.cubeupdate(e, cube, rowDelta, 0);
+                  this.pairCube(e, cube.node);
+                })                        
+          }
+          else{
+            cube.rePosAnim();
           }
       }
-    }else{
-      // console.log("点击，无配对");
-    }         
+    } else {
+      // console.log("点击，直接配对");
+      if (e.CubeManagerModel.getMapValue(row - res.up, col) === val ){ 
+
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row - res.up, col).node.active = false;
+              
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row - res.up, col));
+
+              e.CubeManagerModel.updateMapValueByCube(cube);
+              e.CubeManagerModel.updateMapValue(row - res.up, col);              
+      } 
+      else if (e.CubeManagerModel.getMapValue(row + res.down, col) === val) {
+              
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row + res.down, col).node.active = false;
+              node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row + res.down, col));
+
+              e.CubeManagerModel.updateMapValueByCube(cube);
+              e.CubeManagerModel.updateMapValue(row + res.down, col);
+      }
+      else if (e.CubeManagerModel.getMapValue(row, col - res.left) === val){
+              
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row, col - res.left).node.active = false;
+              // node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row, col - res.left));
+              
+              e.CubeManagerModel.updateMapValueByCube(cube);
+              e.CubeManagerModel.updateMapValue(row, col - res.left);
+      } 
+      else if (e.CubeManagerModel.getMapValue(row, col + res.right) === val) {
+              
+              // node.active = false;
+              // e.CubeManagerModel.getCube(row, col + res.right).node.active = false;
+              // node.setPosition(newPos);
+              e.CubeManagerModel.removeCube(cube);
+              e.CubeManagerModel.removeCube(e.CubeManagerModel.getCube(row, col + res.right));
+              
+              e.CubeManagerModel.updateMapValueByCube(cube);
+              e.CubeManagerModel.updateMapValue(row, col + res.right);              
+      }
+    }        
   }
 
   
-  public returnOrigin() {
-    this._hCubes.forEach(cube => {
-      cube.rePosAnim();
-    });
-    this._vCubes.forEach(cube => {
-      cube.rePosAnim();
-    });
-    this._hCubes = [];
-    this._vCubes = [];    
+  private cubeupdate(e:CubeManager , cube: Cube, row: number, col: number) {
+    e.CubeManagerModel.updateMapValueByCube(cube);
+    cube.updateCube(row, col);
+    e.CubeManagerModel.updateMapValue(cube.model.row, cube.model.col, cube.model.id);
+    const pos = v3((cube.model.col- e.CubeManagerModel.OFFSET_COL) * e.CubeManagerModel.SIZE, (e.CubeManagerModel.OFFSET_ROW - cube.model.row) * e.CubeManagerModel.SIZE, 0);
+    const wPos = this.convertWorldPos(pos);    
+    cube.updateViewPos(pos, wPos);
   }
 
-
-
-
+  public returnOrigin() {
+    this._hLCubes.forEach(cube => {
+      cube.rePosAnim();
+    });
+    this._vUCubes.forEach(cube => {
+      cube.rePosAnim();
+    });
+    this._hRCubes.forEach(cube => {
+      cube.rePosAnim();
+    })
+    this._vDCubes.forEach(cube => {
+      cube.rePosAnim();
+    });
+    this._vUCubes = [];    
+    this._vDCubes = [];
+    this._hLCubes = [];
+    this._hRCubes = [];
+  }
 
   // 将以屏幕中心为原点的坐标转换为以屏幕左下角为原点的坐标
   private convertWorldPos(pos: Vec3): Vec3 {
@@ -337,5 +489,11 @@ export class CubeManagerBll extends Component {
       (e.CubeManagerModel.OFFSET_ROW - row) * e.CubeManagerModel.SIZE,
       0
     );
+  }
+
+
+  private onPairSuccess(pos: Vec3) {
+    // console.log("配对成功");
+
   }
 }

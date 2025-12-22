@@ -62,9 +62,27 @@ export class Cube extends Component {
 
     rePosAnim() {
     this.view.rePosAnim();
-  }
+    }
 
-    updateCube
+
+    /** 更新位置 
+     * @param rowoffset 行偏移
+     * @param coloffset 列偏移
+    */
+    updateCube(rowoffset: number, coloffset: number) {
+        this.model.addoffsetCube(rowoffset, coloffset);                
+    }
+
+    /** 更新视图位置 */
+    updateViewPos(pos: Vec3, wPos: Vec3){
+        this.view.updateCube(pos, wPos);
+    }
+    
+
+    activeMask(active: boolean){
+        this.view.mask.node.active = active;
+    }
+
     /** 消除动画 */
 }
 

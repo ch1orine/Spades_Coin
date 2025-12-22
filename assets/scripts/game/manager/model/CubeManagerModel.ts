@@ -12,7 +12,7 @@ export class CubeManagerModel {
 
   public readonly OFFSET_COL: number = 2.5;
   
-  public readonly OFFSET_ROW: number = 3;
+  public readonly OFFSET_ROW: number = 3.4;
 
   public readonly MOVE_TOLERANCE: number = 40;
 
@@ -64,7 +64,7 @@ export class CubeManagerModel {
       row < 0 ||
       row >= this._map.length
     ) {
-      console.error("GridMap update: Invalid coordinates");
+      // console.error("GridMap update: Invalid coordinates");
       return;
     }
     this._map[row][col] = value;
@@ -85,6 +85,14 @@ export class CubeManagerModel {
 
   getCubesById(id: number): Cube[] {
     return this.cubes.filter((cube) => cube.model.id === id);    
+  }
+
+  removeCube(cube: Cube) {
+    const index = this.cubes.indexOf(cube);
+    if (index > -1) {
+      this.cubes.splice(index, 1);
+    }
+    // cube.node.active = false;
   }
 
 }

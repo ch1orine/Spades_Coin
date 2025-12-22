@@ -20,6 +20,9 @@ export class CubeView extends Component {
   @property({ type: Sprite, tooltip: "麻将图片" })
   sprite!: Sprite;
 
+  @property({ type: Sprite, tooltip: "遮罩图片" })
+  mask!: Sprite;
+
   private _canDrag: boolean = true; //是否可以拖拽
 
   private _isDragging: boolean = false; //是否正在拖拽
@@ -61,13 +64,17 @@ export class CubeView extends Component {
     this.node.on(Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.on(Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.on(Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+
+    this.mask.node.active = false;
     this._siblingIndex = this.node.getSiblingIndex();
   }
 
   private onTouchStart(event: EventTouch) {
     if (!this._canDrag) {
       return;
-    }
+    }        
+
+    this.mask.node.active = true;
     this._isDragging = true;
     this._lockedDirection = null; // 重置锁定方向
     this._xDis = 0;
@@ -154,14 +161,16 @@ export class CubeView extends Component {
       event.getUILocation()
     );
 
+    this.mask.node.active = false;
+    
     const currentWorldPos = this.node.getWorldPosition();
     const distToOrigin = Vec3.squaredDistance(
       currentWorldPos,
       this._originalWorldPos
     );
     EventBus.instance.emit(CubeEvent.onCubeDragEnd, this.node);
+    // 触摸移动距离超过容差，视为拖动操作
     if (distToOrigin > this._moveTolerance) {
-      // 触摸移动距离超过容差，视为拖动操作
       // EventBus.instance.emit(CubeEvent.onCubeDragEnd, this.node);
 
       EventBus.instance.emit(CubeEvent.onCubeReturn, this.node);//test
@@ -172,23 +181,12 @@ export class CubeView extends Component {
       this.node.setSiblingIndex(this._siblingIndex);
       EventBus.instance.emit(CubeEvent.onShakeCube, this.node);
     }
-    this.rePosAnim();
+    // this.rePosAnim();
     // 重置状态
     this._xDis = 0;
     this._yDis = 0;
     this._lockedDirection = null;
   }
-
-  // private onTouchCancel(event: EventTouch) {
-  //   this._isDragging = false;
-  //   this._lockedDirection = null;
-  //   this._xDis = 0;
-  //   this._yDis = 0;  
-  //   this.rePosAnim(); 
-  //   EventBus.instance.emit(CubeEvent.onCubeReturn, this.node);//test     
-  // }
-
-
 
   /** 检查触摸点是否在cube范围内
    * @param touchPos UI坐标系中的触摸位置
@@ -219,6 +217,10 @@ export class CubeView extends Component {
     this._originalWorldPos = this.node.getWorldPosition().clone();
   }
 
+  public updateCube(pos: Vec3, wPos: Vec3) {
+    this._originalPosition = pos.clone();
+    this._originalWorldPos = wPos.clone();    
+  }
 
   public rePosAnim() {    
     tween(this.node)
