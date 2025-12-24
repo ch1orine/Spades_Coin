@@ -12,16 +12,6 @@ export class Jump extends Component {
   private _steps: number = 0;
   
   protected onLoad(): void {    
-    resources.load(`playnow/playnow_${gameConfig.getSimplifiedLanguage()}/spriteFrame`, 
-    SpriteFrame, (err, sprite) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      this.getComponent(Sprite).spriteFrame = sprite;
-    });
-
-
     tween(this.node)       
         .repeatForever(
             tween()

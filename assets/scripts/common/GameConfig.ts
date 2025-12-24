@@ -1,6 +1,28 @@
 import { resources, JsonAsset } from 'cc';
 
 export default class GameConfig {
+    private readonly allowedLanguages = [
+            "en",     // 英语
+            "ja",     // 日语
+            "de",     // 德语
+            "ko",     // 韩语
+            "fr",     // 法语
+            "ru",     // 俄语
+            "zh",     // 繁体中文
+            "es",     // 西班牙语
+            "it",     // 意大利语
+            "pt",     // 葡萄牙语
+            "ar",     // 阿拉伯语
+            "vi",     // 越南语
+            "id",     // 印尼语
+            "ms",     // 马来语
+            "th",     // 泰语
+            "uk",     // 乌克兰语
+            "az"      // 阿塞拜疆语
+        ];
+
+
+
     private configData: any | null = null;
 
     /**
@@ -111,12 +133,18 @@ export default class GameConfig {
 
     /**
      * 获取简化的语言代码（只保留主语言部分）
-     * @returns 简化的语言代码，如 'zh', 'en' 等
+     * @returns 简化的语言代码，如 'zh', 'en' 等，不在允许列表中则返回 'en'
      */
     public  getSimplifiedLanguage(): string {
         const fullLang = this.getBrowserLanguage();
         // 提取语言主代码（连字符或下划线之前的部分）
-        return fullLang.split(/[-_]/)[0].toLowerCase();
+        const simplifiedLang = fullLang.split(/[-_]/)[0].toLowerCase();
+        
+        // 验证是否在允许的语言列表中，不在则回退为 'en'
+        if (this.allowedLanguages.includes(simplifiedLang)) {
+            return simplifiedLang;
+        }
+        return 'en';
     }
     
     public getURL_APP_STORE(): string {

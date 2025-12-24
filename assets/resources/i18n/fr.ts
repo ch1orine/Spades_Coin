@@ -5,7 +5,9 @@ export const languages = {
     // Data
     "main":{
         "skip":"PASSER",
-        "name":"Trouvez les paires et les sommes de 10"
+        "name":"Trouvez les paires et les sommes de 10",
+        "play":"JOUER MAINTENANT",
+
     }
 };
 

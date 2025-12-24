@@ -5,7 +5,8 @@ export const languages = {
     // Data
     "main":{
         "skip":"ÜBERSPRINGEN",
-        "name":"Finde Paare oder Zahlen, die zusammen 10 ergeben"
+        "name":"Finde Paare oder Zahlen, die zusammen 10 ergeben",
+        "play":"JETZT SPIELEN",
     }
 };
 

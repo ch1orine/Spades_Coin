@@ -5,7 +5,8 @@ export const languages = {
     // Data
     "main":{
         "skip":"スキップ",
-        "name":"ペアや10になる組み合わせを見つけよう"
+        "name":"ペアや10になる組み合わせを見つけよう",
+        "play":"今すぐプレイ",
     }
 };
 

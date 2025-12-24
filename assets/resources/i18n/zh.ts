@@ -5,7 +5,8 @@ export const languages = {
     // Data
     "main":{
         "skip":"跳過",
-        "name":"找出數字對與和為10的數字對"
+        "name":"找出數字對與和為10的數字對",
+        "play":"立即玩",
     }
 };
 

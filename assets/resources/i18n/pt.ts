@@ -5,7 +5,8 @@ export const languages = {
     // Data
     "main":{
         "skip":"PULAR",
-        "name":"Encontre pares e soma de 10"
+        "name":"Encontre pares e soma de 10",
+        "play":"JOGAR AGORA",
     }
 };
 

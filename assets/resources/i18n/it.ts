@@ -5,7 +5,8 @@ export const languages = {
     // Data
     "main":{
         "skip":"SALTA",
-        "name":"Trova coppie o numeri che sommano 10"
+        "name":"Trova coppie o numeri che sommano 10",
+        "play":"GIOCA ORA",
     }
 };
 
