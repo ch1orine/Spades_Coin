@@ -193,6 +193,9 @@ export class CubeView extends Component {
       if (this.node.name === "cube_16" ) {
             EventBus.instance.emit(EventBus.UpdateTimer);
       }    
+      if (this.node.name === "cube_42" || this.node.name === "cube_43") {
+          EventBus.instance.emit(CubeEvent.onShakeCube, this.node); 
+      }
     }    
     // 重置状态
     this._xDis = 0;

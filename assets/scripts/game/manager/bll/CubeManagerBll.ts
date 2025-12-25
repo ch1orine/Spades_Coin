@@ -490,7 +490,9 @@ export class CubeManagerBll extends Component {
               e.CubeManagerModel.updateMapValue(row, col + res.right);
             
       }else{
-        EventBus.instance.emit(CubeEvent.onShakeCube, cube.node); 
+        if (cube.node.name !== "cube_42" && cube.node.name !== "cube_43") {
+          EventBus.instance.emit(CubeEvent.onShakeCube, cube.node); 
+        }
       }
     }        
   }
