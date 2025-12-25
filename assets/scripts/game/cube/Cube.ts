@@ -112,9 +112,13 @@ export class Cube extends Component {
         // .to(0.25, {scale: v3(1.1, 1.1, 1)})             
         .call(()=>{
             this.activeMask(false);
-            EventBus.instance.emit(CubeEvent.FlyStart, this.node);
+            // EventBus.instance.emit(CubeEvent.FlyStart, this.node);
         })
         .start();    
+
+        setTimeout(() => {
+            EventBus.instance.emit(CubeEvent.FlyStart, this.node);
+        }, 400);
 
         tween({t:0})
         .delay(totalDelay)

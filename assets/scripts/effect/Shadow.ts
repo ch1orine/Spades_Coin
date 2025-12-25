@@ -21,7 +21,7 @@ export class Shadow extends Component {
       
         if (this.followNode != null) {
             if (this.followNode.activeInHierarchy){
-                this.node.setPosition(this.followNode.getPosition().add(v3(-20, -15, 0))); // 设置阴影的位置与跟随节点相同
+                this.node.setPosition(this.followNode.getPosition().add(v3(-22, -12, 0))); // 设置阴影的位置与跟随节点相同
                 if (this._onFinish) {                    
                     if ( this.node.getPosition().y > 400) {
                         this.node.setScale(this.followNode.getScale().subtract(v3(0.35, 0.35, 0))); // 设置阴影的缩放与跟随节点相同

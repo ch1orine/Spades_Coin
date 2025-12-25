@@ -22,8 +22,8 @@ export class Main extends Component {
   @property(Camera)
   camera: Camera;
 
-  private readonly URL_APPSTORE= "https://apps.apple.com/us/app/number-match-fun-puzzle-game/id6473832648";
-  private readonly URL_GOOGLE_PLAY= "https://play.google.com/store/apps/details?id=daily.number.match.free.puzzle"
+  private readonly URL_APPSTORE= "https://apps.apple.com/us/app/daily-mahjong-match/id6741703805";
+  private readonly URL_GOOGLE_PLAY= "https://play.google.com/store/apps/details?id=com.bigcake.android.mahjongmatch"
 
   onLoad() {
     //配置playable数据
