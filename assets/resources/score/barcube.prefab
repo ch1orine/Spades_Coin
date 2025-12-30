@@ -92,7 +92,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -35,
+      "x": -37,
       "y": 35,
       "z": 0
     },
@@ -133,7 +133,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 19.73,
+      "width": 23.67,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -163,7 +163,7 @@
     "_string": "12",
     "_horizontalAlign": 0,
     "_verticalAlign": 0,
-    "_fontSize": 15,
+    "_fontSize": 18,
     "_fontColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -182,7 +182,7 @@
       "__uuid__": "1bbe4ed6-fe28-46e8-af5f-5516d14b5864",
       "__expectedType__": "cc.BitmapFont"
     },
-    "_cacheMode": 0,
+    "_cacheMode": 2,
     "_imageAtlas": null,
     "_handleTouchEvent": true,
     "_id": ""
