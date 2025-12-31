@@ -72,12 +72,12 @@ export class CubeManagerBll  {
   private onTouchEnd(e: CubeManager) {
     EventBus.instance.emit(EffectEvent.LineClear);
     if (this._selectedCubes.length >= 2) {
+      Sound.ins.playOneShot(Sound.effect.ing);
       const id = this._selectedCubes[0].model.id
       const score = find(`gui/game/Bar/Layout/${id}`);
       // 批量移除选中的麻将
       e.removeCubes(this._selectedCubes);
-      if(score){
-        Sound.ins.playOneShot(Sound.effect.ing);  
+      if(score){          
         setTimeout(() => {        
         EventBus.instance.emit(EffectEvent.ShowBoom, find(`gui/game/Bar/Layout/${id}`).getWorldPosition()); 
          

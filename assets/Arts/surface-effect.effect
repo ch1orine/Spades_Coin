@@ -4,13 +4,16 @@ CCEffect %{
   techniques:
   - name: dye-demo
     passes:
-    - vert: vs:vert
+    - vert: vs:vert //1.图像处理 2.顶点处理(vertex shader) 3.[可选]图源处理(gemetry shader) 4.光栅化(rasterization shader) 5.片元处理(fragment shader) 6.测试与混合
       frag: fs:frag
       blendState:
         targets:
-        - blend: true
-          blendSrc: src_alpha
+        - blend: true #开启混合模式
+          blendSrc: src_alpha #使用片源着色器输出的alpha值作为源因子
           blendDst: one_minus_src_alpha  
+      depthStencilState:
+        depthTest: false
+        depthWrite: false       
 }%
 
 
@@ -19,22 +22,25 @@ CCProgram vs %{
   #include <cc-global>
 
   in vec3 a_position;
-  
+  in vec2 a_texCoord;
+  out vec2 uv;
+
   vec4 vert() {
     vec4 pos = vec4(a_position, 1);
-    return cc_matViewProj * pos;
+    pos = cc_matViewProj * pos;
+    uv = a_texCoord;
+    return pos;
   }
 }%
 
 CCProgram fs %{
   precision highp float;
+  #include <sprite-texture>
 
+  in vec2 uv;
+  
   vec4 frag() {
-    return vec4(0.0, 1.0, 0.0, 0.5);
+    return vec4(0.0, 1.0, 0.0, 0.5);//这里的0.5就是上面的src_alpha
   }
 }%
 
-作者：VaJoy
-链接：https://juejin.cn/post/7514467937602158607
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
