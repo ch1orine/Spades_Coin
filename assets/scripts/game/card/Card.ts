@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, resources, Vec3, SpriteFrame, Vec2, tween } from 'cc';
+import { _decorator, Component, Node, resources, Vec3, SpriteFrame, Vec2, tween, math } from 'cc';
 import { CardModel, ESuit, ERank } from './model/CardModel';
 import { CardView } from './view/CardView';
 import { CardBll } from './bll/CardBll';
@@ -43,8 +43,26 @@ export class Card extends Component {
    
    /** 回收card */   
    flyAway(pos: Vec3){
+        const moveSpeed = 3000; // 移动速度，单位：像素/秒
+        this.node.setSiblingIndex(0); // 置顶
+        // 获取当前位置
+        const currentPos = this.node.worldPosition.clone();
+        // 计算方向向量
+        const direction = new Vec3();
+        Vec3.subtract(direction, pos, currentPos);
+        const dis = direction.length(); // 计算距离
+        direction.normalize();
+        
+        // 反方向移动的位置（往相反方向移动一小段距离）
+        const backPos = new Vec3();
+        Vec3.scaleAndAdd(backPos, currentPos, direction, -45); // 反向移动30个单位
+        this.node.angle += math.randomRangeInt(-5, 5); // 随机旋转角度
         tween(this.node)
-        .to(0.6, { worldPosition: pos })
+        .to(0.15, { worldPosition: backPos }) // 先往反方向移动
+        .to(dis / moveSpeed, { worldPosition: pos }) // 然后快速飞向目标
+        .call(() => {
+            this.node.active = false;
+        })
         .start();
    }
    

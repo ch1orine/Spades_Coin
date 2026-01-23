@@ -62,7 +62,7 @@ export class Deal extends Component {
             cardNode.active = false;
             this.cardPool.push(cardNode);
         }
-        console.log(`卡牌对象池初始化完成，池大小: ${this.POOL_SIZE}`);
+        // console.log(`卡牌对象池初始化完成，池大小: ${this.POOL_SIZE}`);
     }
 
     /**

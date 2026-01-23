@@ -70,8 +70,6 @@ export class GameManager {
       }
       const node = instantiate(prefab);
       node.parent = this.view.container;
-      // const deal = node.getComponent(Deal);
-      // deal.init(this);
     });
   }
 
@@ -102,12 +100,6 @@ export class GameManager {
    * 下一个玩家出牌
    */
   private nextPlayer(card: Card) {
-
-    // 移除重复调用，setTableCards 已通过事件监听触发
-    // this.setTableCards(card);
-    // this.model.currentPlayerIndex = this.model.currentPlayerIndex % this.model.MAX_PLAYERS;    
-    // // console.log("11111111",card);
-    // this.model.tableCards.set(this.model.currentPlayerIndex, card);
     this.setTableCards(card);
   
     this.model.currentPlayerIndex = (this.model.currentPlayerIndex + 1) % this.model.MAX_PLAYERS;
@@ -120,8 +112,7 @@ export class GameManager {
     this.model.currentCount = this.model.currentCount + 1;    
 
     console.log("当前已出牌数：" + this.model.currentCount);
-    if(this.model.tableCards.size === this.model.MAX_PLAYERS){      
-      console.log(this.model.tableCards);
+    if(this.model.tableCards.size === this.model.MAX_PLAYERS){            
       this.getWinner();
       return;
     }
@@ -134,7 +125,7 @@ export class GameManager {
 
   private setView(view: GameManagerView) {
     this.view = view;
-    console.log("设置 GameManager 视图完成");
+    // console.log("设置 GameManager 视图完成");
     this.geneDealCard();
     setTimeout(() => {      
       this.generatePlayers();
@@ -147,10 +138,8 @@ export class GameManager {
   
 
   private setTableCards(card: Card) {    
-    this.model.currentPlayerIndex = this.model.currentPlayerIndex % this.model.MAX_PLAYERS;    
-    // console.log("8888888888*********",this.model.currentPlayerIndex);
-    this.model.tableCards.set(this.model.currentPlayerIndex, card);
-    // console.log(this.model.tableCards);    
+    this.model.currentPlayerIndex = this.model.currentPlayerIndex % this.model.MAX_PLAYERS;        
+    this.model.tableCards.set(this.model.currentPlayerIndex, card);    
   }
 
   private removeCard(card: Card){

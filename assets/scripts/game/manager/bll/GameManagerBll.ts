@@ -69,7 +69,7 @@ export class GameManagerBll  {
         //将非获胜卡片的遮罩设置为显示    
         EventBus.instance.emit(GameManagerEvent.WinnerCalculated, e, winningCard);
 
-        console.log("赢家是玩家：" + e.model.currentPlayerIndex);
+        console.log("赢家是：" + e.model.currentPlayerIndex);
         if(e.model.currentPlayerIndex % 2 === 0){
             EventBus.instance.emit(ScoreEvent.PlayerScoreUpdated);
         } else {
