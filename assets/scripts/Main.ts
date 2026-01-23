@@ -3,11 +3,10 @@ import { gameConfig } from "./common/GameConfig";
 import { Sound } from "./sound/Sound";
 import super_html_playable from "./common/super_html_playable";
 import { EventBus } from "./event/EventBus";
-import { GuideManager } from "./game/guide/GuideManager";
 import { GuideEvent } from "./game/guide/GuideEvent";
 import * as i18n from 'db://i18n/LanguageData';
-import { CubeManager } from "./game/manager/CubeManager";
 import { EffectManager } from "./effect/EffectManager";
+import { GameManager } from "./game/manager/GameManager";
 const { ccclass, property } = _decorator;
 
 @ccclass("Main")
@@ -22,8 +21,8 @@ export class Main extends Component {
   @property(Camera)
   camera: Camera;
 
-  private readonly URL_APPSTORE= "https://apps.apple.com/us/app/daily-mahjong-match/id6741703805";
-  private readonly URL_GOOGLE_PLAY= "https://play.google.com/store/apps/details?id=com.bigcake.android.mahjongmatch"
+  private readonly URL_APPSTORE = "https://play.google.com/store/apps/details?id=com.bigcake.android.spadesclassic";
+  private readonly URL_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=com.bigcake.android.spadesclassic"
 
   onLoad() {
     //配置playable数据
@@ -51,6 +50,9 @@ export class Main extends Component {
   }
 
   init() {
+    const manager = new GameManager();
+    manager.init();
+    
     resources.load("prefabs/game", Prefab, (err, prefab) => {
       if (err) {
         console.error(err);
@@ -61,11 +63,10 @@ export class Main extends Component {
       EventBus.instance.on(EventBus.GameOver, () => {
         node.pauseSystemEvents(true);
       });
-      const manager = new CubeManager();
-      manager.init();
+      // const manager = new GameManager();
+      // manager.init();
       const effect = new EffectManager();      
-      const guide = new GuideManager();
-      // guide.init();
+      // const guide = new GuideManager();      
     });
 
     resources.load("prefabs/skip", Prefab, (err, prefab) => {

@@ -8,15 +8,10 @@ export class Sound {
     public static music = {
         bgm: "audio/bgm/bgm",
     }
-    public static effect = {
-        // pair: "audio/effect/pair",   //配对
-        click: "audio/effect/click", //点击
-        fly: "audio/effect/fly",       //飞起
-        line: "audio/effect/line",   //连线
-        // slide: "audio/effect/slide", //滑动
-        // shake: "audio/effect/shake", //摇动
-        ing: "audio/effect/ing",     //进行中
-        boom: "audio/effect/boom",   //爆炸
+    public static effect = {        
+        click: "audio/effect/click", //点击                        
+        deal: "audio/effect/deal", //发牌        
+        win: "audio/effect/win", //胜利
     }
 
     private static _curMusic: string = "";
