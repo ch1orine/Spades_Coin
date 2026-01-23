@@ -37,6 +37,8 @@ export class CardModel extends Component {
 
     canPlay: boolean = true; // 是否可以出牌
 
+    moveSpeed: number = 3000; // 卡牌移动速度，单位：像素/秒
+
     reset(){        
 
         this.y = 0;

@@ -43,7 +43,7 @@ export class Card extends Component {
    
    /** 回收card */   
    flyAway(pos: Vec3){
-        const moveSpeed = 3000; // 移动速度，单位：像素/秒
+        const moveSpeed = this.model.moveSpeed; // 移动速度，单位：像素/秒
         this.node.setSiblingIndex(0); // 置顶
         // 获取当前位置
         const currentPos = this.node.worldPosition.clone();
