@@ -29,12 +29,14 @@ export class Jump extends Component {
     console.log("jump steps: " + this._steps);
     if (this._steps >= gameConfig.getStepsToJump()) {
       this.onHandler();
-      super_html_playable.game_end() //用插件跳转商店下载页
+      // super_html_playable.game_end() //用插件跳转商店下载页
       EventBus.instance.emit(EventBus.GameOver); //游戏结束 
     }
   }
 
   onHandler() {    
     super_html_playable.download(); //用插件跳转商店下载页      
+
+    super_html_playable.game_end() //用插件跳转商店下载页
   }
 }
