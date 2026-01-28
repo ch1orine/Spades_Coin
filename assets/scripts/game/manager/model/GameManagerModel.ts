@@ -26,66 +26,60 @@ export class GameManagerModel {
       new Vec2(ESuit.heart, ERank.King), 
       new Vec2(ESuit.spade, ERank.Five), 
       new Vec2(ESuit.spade, ERank.Eight), 
-      new Vec2(ESuit.club, ERank.Jack), 
-      new Vec2(ESuit.club, ERank.Queen),    
+      new Vec2(ESuit.spade, ERank.Jack), 
+      new Vec2(ESuit.spade, ERank.Queen),    
       new Vec2(ESuit.spade, ERank.Ace)
    ]; 
 
    public Left_CARD: Vec2[] =[
-      new Vec2(ESuit.club, ERank.Two),
-      new Vec2(ESuit.diamond, ERank.Three),
-      new Vec2(ESuit.heart, ERank.Four),
-      new Vec2(ESuit.spade, ERank.Five),
-      new Vec2(ESuit.club, ERank.Six),
-      new Vec2(ESuit.diamond, ERank.Seven),
-      new Vec2(ESuit.heart, ERank.Eight),
-      new Vec2(ESuit.spade, ERank.Nine),
-      new Vec2(ESuit.club, ERank.Ten),
-      new Vec2(ESuit.diamond, ERank.Jack),
-      new Vec2(ESuit.heart, ERank.Queen),
+      new Vec2(ESuit.club, ERank.Four),
+      new Vec2(ESuit.club, ERank.Eight),
+      new Vec2(ESuit.club, ERank.Jack),
+      new Vec2(ESuit.diamond, ERank.Five),
+      new Vec2(ESuit.diamond, ERank.King),
+      new Vec2(ESuit.diamond, ERank.Nine),
+      new Vec2(ESuit.heart, ERank.Six),
+      new Vec2(ESuit.heart, ERank.Seven),
+      new Vec2(ESuit.heart, ERank.Ten),
+      new Vec2(ESuit.spade, ERank.Three),
+      new Vec2(ESuit.spade, ERank.Six),      
       new Vec2(ESuit.spade, ERank.King),
-      new Vec2(ESuit.spade, ERank.Ace)      
+      new Vec2(ESuit.spade, ERank.Ten)      
    ]
 
    public Up_CARD: Vec2[] =[
-      new Vec2(ESuit.club, ERank.Two),
-      new Vec2(ESuit.diamond, ERank.Three),
-      new Vec2(ESuit.heart, ERank.Four),
-      new Vec2(ESuit.spade, ERank.Five),
+      new Vec2(ESuit.club, ERank.Ace),
+      new Vec2(ESuit.club, ERank.Three),
       new Vec2(ESuit.club, ERank.Six),
-      new Vec2(ESuit.diamond, ERank.Seven),
-      new Vec2(ESuit.heart, ERank.Eight),
-      new Vec2(ESuit.spade, ERank.Nine),
-      new Vec2(ESuit.club, ERank.Ten),
-      new Vec2(ESuit.diamond, ERank.Jack),
-      new Vec2(ESuit.heart, ERank.Queen),
-      new Vec2(ESuit.spade, ERank.King),
-      new Vec2(ESuit.spade, ERank.Ace) 
+      new Vec2(ESuit.club, ERank.Seven),
+      new Vec2(ESuit.diamond, ERank.Two),
+      new Vec2(ESuit.diamond, ERank.Six),
+      new Vec2(ESuit.diamond, ERank.Four),
+      new Vec2(ESuit.diamond, ERank.Ten),
+      new Vec2(ESuit.heart, ERank.Three),
+      new Vec2(ESuit.heart, ERank.Jack),
+      new Vec2(ESuit.heart, ERank.Nine),
+      new Vec2(ESuit.spade, ERank.Four),
+      new Vec2(ESuit.spade, ERank.Nine) 
    ];
 
 
    public Right_CARD: Vec2[] =[
-      new Vec2(ESuit.club, ERank.Two),
-      new Vec2(ESuit.diamond, ERank.Three),
-      new Vec2(ESuit.heart, ERank.Four),
-      new Vec2(ESuit.spade, ERank.Five),
-      new Vec2(ESuit.club, ERank.Six),
-      new Vec2(ESuit.diamond, ERank.Seven),
-      new Vec2(ESuit.heart, ERank.Eight),
-      new Vec2(ESuit.spade, ERank.Nine),
+      new Vec2(ESuit.club, ERank.Five),
+      new Vec2(ESuit.club, ERank.Nine),
       new Vec2(ESuit.club, ERank.Ten),
+      new Vec2(ESuit.club, ERank.King),
       new Vec2(ESuit.diamond, ERank.Jack),
-      new Vec2(ESuit.heart, ERank.Queen),
-      new Vec2(ESuit.spade, ERank.King),
-      new Vec2(ESuit.spade, ERank.Ace) 
+      new Vec2(ESuit.diamond, ERank.Eight),
+      new Vec2(ESuit.diamond, ERank.Seven),
+      new Vec2(ESuit.diamond, ERank.Queen),
+      new Vec2(ESuit.heart, ERank.Eight),      
+      new Vec2(ESuit.heart, ERank.Ace),
+      new Vec2(ESuit.heart, ERank.Five),
+      new Vec2(ESuit.spade, ERank.Two),
+      new Vec2(ESuit.spade, ERank.Seven),   
    ];
 
-   // public readonly GAME_FLOW: number[][] = [
-   //    [4, 5, 2],// 玩家先手 第一轮
-   //    [1, 2, 3],// 玩家先手 第二轮
-   //    [2, 3, 0],// 左AI先手 第三轮
-   //    [3, 0, 1] // 上AI先手 第四轮
-   // ];
    public currentPlayerIndex: number = 0; // 当前出牌的玩家索引
 
    public leadingSuit: ESuit = ESuit.None; // 当前出牌的花色

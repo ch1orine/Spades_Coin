@@ -1,12 +1,12 @@
 import { _decorator, Component, instantiate, Layout, math, Node, Prefab, resources, Vec2, Vec3 } from 'cc';
 import { PlayerModel, PlayerType } from './model/PlayerModel';
-import { PlayerBll } from './bll/PlayerBll';
 import { PlayerView } from './view/PlayerView';
 import { EventBus } from '../../event/EventBus';
 import { Card } from '../card/Card';
 import { PlayerEvent } from './PlayerEvent';
 import { CardEvent } from '../card/CardEvent';
 import { JumpEvent } from '../jump/JumpEvent';
+import { CoinEvent } from '../Coin/CoinEvent';
 const { ccclass, property } = _decorator;
 
 @ccclass('Player')
@@ -15,12 +15,10 @@ export class Player extends Component {
     
     view!: PlayerView;
 
-    bll!: PlayerBll;  
     
     onLoad(): void {
         this.model = this.addComponent(PlayerModel);
         this.view = this.getComponent(PlayerView);
-        this.bll = this.addComponent(PlayerBll);
 
         // this.createCardInHand();      
         EventBus.instance.on(PlayerEvent.PLAY_CARD, ()=>{
@@ -83,6 +81,7 @@ export class Player extends Component {
             }    
             setTimeout(() => {      
               this.view.score.node.active = true; // 显示分数
+              EventBus.instance.emit(CoinEvent.ShowCoin); // 显示硬币
               this.view.filterCardsInHand(this, 7); // 过滤手牌
               this.highLightCard(); // 高亮牌
             }, 2000);
@@ -98,12 +97,10 @@ export class Player extends Component {
         this.view.filterCardsInHand(this, suit); // 过滤手牌
         EventBus.instance.emit(JumpEvent.onJump);
       }else{
-        this.model.setCard(new Vec2(suit, math.randomRangeInt(2, 13))); // 打出牌的数据 
-        
-        this.model.Cards[0].onPlayCard(); //打出牌的索引
-        this.model.Cards.splice(0, 1); // 删除牌
+        const card = this.model.Cards.filter(card => card.model.suit === suit)[0];        
+        card.onPlayCard(); //打出牌的索引
+        this.model.Cards.splice(this.model.Cards.indexOf(card), 1); // 删除牌
         console.log("AI出牌");
-        // this.view.filterCardsInHand(this, 0); // 过滤手牌
       }
     }
 

@@ -14,4 +14,7 @@ export enum EffectEvent {
 
   /** 显示刀光 */
   ShowBlade = "ShowBlade",
+
+  /** 金币飞出 */
+  FlyCoin = "FlyCoin"
 }

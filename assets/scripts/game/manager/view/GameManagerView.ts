@@ -4,6 +4,7 @@ import { GameManagerEvent } from '../GameManagerEvent';
 import { Card } from '../../card/Card';
 import { GameManager } from '../GameManager';
 import { EffectEvent } from '../../../effect/EffectEvent';
+import { CoinEvent } from '../../Coin/CoinEvent';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManagerView')
@@ -44,7 +45,12 @@ export class GameManagerView extends Component {
             card.flyAway(pos);
             // card.node.active = false;
         }        
-        EventBus.instance.emit(GameManagerEvent.CardsCleared);
+        //TODO: 等待动画完成后再发事件
+        EventBus.instance.emit(CoinEvent.FlyCoin, index);
+        // EventBus.instance.emit(CoinEvent.CoinAdd, index);
+        setTimeout(() => {
+            EventBus.instance.emit(GameManagerEvent.CardsCleared);            
+        }, 500);
     }
 
     private calPosByIndex(index: number): Vec3 {
