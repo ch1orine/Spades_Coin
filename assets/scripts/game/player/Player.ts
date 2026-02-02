@@ -97,7 +97,12 @@ export class Player extends Component {
         this.view.filterCardsInHand(this, suit); // 过滤手牌
         EventBus.instance.emit(JumpEvent.onJump);
       }else{
-        const card = this.model.Cards.filter(card => card.model.suit === suit)[0];        
+        console.log("AI出的是:" + suit);
+        var card = this.model.Cards.filter(card => card.model.suit === suit)[0];    
+        if (!card) {
+          console.log("没有找到该牌");
+          card = this.model.Cards[0]; // 如果没有找到该牌，就出第一张牌
+        }   
         card.onPlayCard(); //打出牌的索引
         this.model.Cards.splice(this.model.Cards.indexOf(card), 1); // 删除牌
         console.log("AI出牌");

@@ -1,0 +1,14 @@
+info face="face" size=45
+common lineHeight=45 scaleW=165 scaleH=92 pages=1
+page id=0 file="1.png"
+chars count=10
+char id=57 x=0 y=0 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=49 x=33 y=0 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=51 x=66 y=0 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=55 x=132 y=46 width=32 height=43 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=53 x=0 y=46 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=56 x=33 y=46 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=48 x=66 y=46 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=50 x=99 y=0 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=54 x=99 y=46 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15
+char id=52 x=132 y=0 width=32 height=45 xoffset=0 yoffset=0 xadvance=32 page=0 chnl=15

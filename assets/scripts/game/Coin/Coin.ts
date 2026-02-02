@@ -1,4 +1,4 @@
-import { _decorator, Component, Label, Node, tween } from 'cc';
+import { _decorator, Component, Label, math, Node, tween } from 'cc';
 import { EventBus } from '../../event/EventBus';
 import { CoinEvent } from './CoinEvent';
 const { ccclass, property } = _decorator;
@@ -14,9 +14,9 @@ export class Coin extends Component {
     private _currentCoin: number = 1500;
     
     start() {
-        
         EventBus.instance.on(CoinEvent.FlyCoin, this.addCoin, this);
 
+        this._currentCoin = math.randomRangeInt(1200, 1500);
         this.label.string = this._currentCoin.toString();
     }
 

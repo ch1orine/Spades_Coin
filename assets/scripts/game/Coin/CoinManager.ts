@@ -3,6 +3,7 @@ import { Coin } from './Coin';
 import { EventBus } from '../../event/EventBus';
 import { CoinEvent } from './CoinEvent';
 import MoveLogic from '../../common/MoveLogic';
+import { Sound } from '../../sound/Sound';
 const { ccclass, property } = _decorator;
 
 
@@ -24,7 +25,7 @@ export class CoinManager extends Component {
     private _coinEffectPrefab: Prefab | null = null;
     private readonly POOL_INIT_SIZE = 10; // 初始对象池大小
 
-    private readonly COIN_COUNT = 5; // 每次飞的金币数量
+    private readonly COIN_COUNT = 15; // 每次飞的金币数量
 
     onLoad() {
         EventBus.instance.on(CoinEvent.ShowCoin, () =>{
@@ -103,8 +104,8 @@ export class CoinManager extends Component {
             if (i == index) continue;
             for (let j = 0; j < this.COIN_COUNT; j++){
                 this.scheduleOnce(() => {
-                    this.fly(this._pos[i].x, this._pos[i].y, pos.x, pos.y, {playerId: i, toPlayerId: index, score: 1}, true);
-                }, j * 0.1);
+                    this.fly(this._pos[i].x + 100, this._pos[i].y, pos.x, pos.y, {playerId: i, toPlayerId: index, score: 1}, true);
+                }, j * 0.03);
             }
         }
         // this._coins.forEach(coin => {
@@ -131,8 +132,27 @@ export class CoinManager extends Component {
         EventBus.instance.emit(EventBus.PayScoreStartEvent, pay);
         const c0 = v2(cx, cy);
         const c2 = v2(toX, toY);
-        const c1 = v2((c2.x - c0.x) / 2, (c2.y - c0.y) / 2);
-        MoveLogic.bezier2(node, 0.7, c0, c1, c2, false, () => {
+        
+        // 优化贝塞尔曲线控制点
+        const dx = c2.x - c0.x;
+        const dy = c2.y - c0.y;
+        
+        // 让控制点靠前一些（从起点算30%位置），并且增加垂直偏移
+        // 对于垂直移动（dx接近0），增加横向偏移让曲线更有弧度
+        let offsetX = dx * 0.3;
+        let offsetY = dy * 0.3;
+        
+        // 如果是接近垂直的移动（dx很小），增加横向偏移
+        if (Math.abs(dx) < 100) {
+            offsetX += (dx >= 0 ? 150 : -150); // 增加横向偏移
+        }
+        
+        // 增加一些向上的弧度
+        offsetY += 100;
+        
+        const c1 = v2(c0.x + offsetX, c0.y + offsetY);
+        MoveLogic.bezier2(node, 0.3, c0, c1, c2, false, () => {
+            Sound.ins.playOneShot(Sound.effect.click);
             EventBus.instance.emit(EventBus.OnePayScoreEvent, pay);
             if (isEnd) EventBus.instance.emit(EventBus.PayScoreCompleteEvent, pay);
             this.recycleCoinToPool(node); // 回收到对象池
