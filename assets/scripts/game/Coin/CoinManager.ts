@@ -18,7 +18,7 @@ export class CoinManager extends Component {
 
     private _coins: Coin[] = [];
 
-    private _pos: Vec3[] = [new Vec3(0, -270, 0), new Vec3(-300, 320, 0), new Vec3(0, 360, 0), new Vec3(300, 320, 0)];
+    private _pos: Vec3[] = [new Vec3(-20, -270, 0), new Vec3(-280, 320, 0), new Vec3(-20, 360, 0), new Vec3(220, 320, 0)];
 
     // 金币特效对象池
     private _coinEffectPool: Node[] = [];

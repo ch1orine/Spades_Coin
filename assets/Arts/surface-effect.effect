@@ -13,7 +13,11 @@ CCEffect %{
           blendDst: one_minus_src_alpha  
       depthStencilState:
         depthTest: false
-        depthWrite: false       
+        depthWrite: false     
+  - name: test2
+    passes:
+    - vert: vs:vert 
+      frag: fs:frag        
 }%
 
 
