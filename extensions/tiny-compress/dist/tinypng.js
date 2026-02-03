@@ -22,7 +22,7 @@ const options = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
     }
 };
-function compress(filePath) {
+async function compress(filePath) {
     if (!fs_1.default.existsSync(filePath)) {
         console.log(`路径不存在：${filePath}`);
         return;
@@ -31,62 +31,54 @@ function compress(filePath) {
     if (!fs_1.default.statSync(filePath).isDirectory()) {
         if (exts.includes(path_1.default.extname(filePath))) {
             console.log(`[${fileName}] 压缩中...`);
-            fileTinyUpload(filePath)
-                .then(data => {
-                console.log(`[1/1] [${fileName}] 压缩成功，原始: ${toSize(data.input.size)}，压缩: ${toSize(data.output.size)}，压缩比: ${toPercent(1 - data.output.ratio)}`);
-            })
-                .catch(err => {
+            try {
+                const data = await fileTinyUpload(filePath);
+                console.log(`[1/1] [${fileName}] 压缩成功，原始: ${toSize(data.input.size)}，压缩: ${toSize(data.output.size)}，压缩比: ${toPercent(data.output.ratio)}`);
+            }
+            catch (err) {
                 console.log(`[1/1] [${fileName}] 压缩失败！报错：${err}`);
-            });
+            }
         }
         else {
             console.log(`[${fileName}] 压缩失败！报错：只支持 png、jpg 与 jpeg 格式`);
         }
     }
     else {
-        let totalCount = 0;
+        const files = await listCompressibleFiles(filePath);
+        const totalCount = files.length;
         let processedCount = 0;
-        fileEach(filePath, (filePathInDir) => {
-            totalCount++;
+        for (const filePathInDir of files) {
             const relativePath = path_1.default.relative(filePath, filePathInDir);
-            fileTinyUpload(filePathInDir)
-                .then(data => {
-                console.log(`[${++processedCount}/${totalCount}] [${relativePath}] 压缩成功，原始: ${toSize(data.input.size)}，压缩: ${toSize(data.output.size)}，压缩比: ${toPercent(1 - data.output.ratio)}`);
-            })
-                .catch(err => {
-                console.log(`[${++processedCount}/${totalCount}] [${relativePath}] 压缩失败！报错：${err}`);
-            });
-        });
+            try {
+                const data = await fileTinyUpload(filePathInDir);
+                processedCount += 1;
+                console.log(`[${processedCount}/${totalCount}] [${relativePath}] 压缩成功，原始: ${toSize(data.input.size)}，压缩: ${toSize(data.output.size)}，压缩比: ${toPercent(data.output.ratio)}`);
+            }
+            catch (err) {
+                processedCount += 1;
+                console.log(`[${processedCount}/${totalCount}] [${relativePath}] 压缩失败！报错：${err}`);
+            }
+        }
     }
 }
 exports.compress = compress;
 function getRandomIP() {
     return Array.from(Array(4)).map(() => Math.floor(255 * Math.random())).join('.');
 }
-function fileEach(dir, callback) {
-    fs_1.default.readdir(dir, (err, files) => {
-        if (err) {
-            console.error(err);
-            return;
+async function listCompressibleFiles(dir) {
+    const entries = await fs_1.default.promises.readdir(dir);
+    const results = [];
+    for (const entry of entries) {
+        const entryPath = path_1.default.join(dir, entry);
+        const stats = await fs_1.default.promises.stat(entryPath);
+        if (stats.isDirectory()) {
+            results.push(...await listCompressibleFiles(entryPath));
         }
-        files.forEach((file) => {
-            const filePath = path_1.default.join(dir, file);
-            fs_1.default.stat(filePath, (statErr, stats) => {
-                if (statErr) {
-                    console.error(statErr);
-                    return;
-                }
-                if (stats.isDirectory()) {
-                    fileEach(filePath, callback);
-                }
-                else {
-                    if (stats.size <= max && stats.isFile() && exts.includes(path_1.default.extname(file))) {
-                        callback(filePath);
-                    }
-                }
-            });
-        });
-    });
+        else if (stats.isFile() && stats.size <= max && exts.includes(path_1.default.extname(entry))) {
+            results.push(entryPath);
+        }
+    }
+    return results;
 }
 function fileUpload(filePath) {
     return new Promise((resolve, reject) => {
